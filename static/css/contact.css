@@ -1,0 +1,336 @@
+/* ==========================================
+   SecretX Tech - Contact Page Stylesheet
+   ========================================== */
+
+/* Reset & Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #0a0a1a 0%, #1a1a3e 50%, #0f0f2d 100%);
+    min-height: 100vh;
+    color: #fff;
+    overflow-x: hidden;
+}
+
+/* Background effects */
+.bg-grid {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image:
+        linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.glow-orb {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.3;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.glow-orb-1 {
+    width: 400px;
+    height: 400px;
+    background: #ff00ff;
+    top: -100px;
+    right: -100px;
+}
+
+.glow-orb-2 {
+    width: 300px;
+    height: 300px;
+    background: #00ffff;
+    bottom: -50px;
+    left: -50px;
+}
+
+/* Top navigation */
+.top-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50px;
+    background: rgba(26, 26, 46, 0.9);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 25px;
+    z-index: 1001;
+    border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+}
+
+.nav-logo {
+    position: relative;
+    width: 30px;
+    height: 30px;
+    filter: drop-shadow(0 0 4px rgba(255, 0, 50, 0.5));
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+.nav-logo::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 32px;
+    height: 5px;
+    background: linear-gradient(90deg, #ff0033 0%, #ff0033 85%, transparent 100%);
+    transform: translate(-50%, -50%) rotate(55deg);
+    border-radius: 2px;
+    clip-path: polygon(0 0, 100% 20%, 100% 80%, 0 100%);
+}
+
+.nav-logo::after {
+    content: '';
+    position: absolute;
+    top: 40%;
+    left: 45%;
+    width: 30px;
+    height: 4px;
+    background: linear-gradient(90deg, transparent 0%, #ff0033 15%, #ff0033 100%);
+    transform: translate(-50%, -50%) rotate(-50deg);
+    border-radius: 2px;
+    clip-path: polygon(0 20%, 100% 0, 100% 100%, 0 80%);
+}
+
+.back-btn {
+    color: #00ffff;
+    text-decoration: none;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.3s ease;
+}
+
+.back-btn:hover {
+    color: #ff00ff;
+}
+
+/* Main container */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 100px 2rem 3rem 2rem;
+    position: relative;
+    z-index: 1;
+}
+
+/* Contact section */
+.contact-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    margin-top: 2rem;
+}
+
+@media (max-width: 900px) {
+    .contact-wrapper {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Left side - Info */
+.contact-info {
+    padding: 2rem;
+}
+
+.contact-info h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, #00ffff, #ff00ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.contact-info .subtitle {
+    font-size: 1.2rem;
+    color: #b0b0b0;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.contact-method {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background: rgba(26, 26, 46, 0.6);
+    border-radius: 10px;
+    border: 1px solid rgba(0, 255, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.contact-method:hover {
+    border-color: #ff00ff;
+    transform: translateX(10px);
+}
+
+.contact-method .icon {
+    font-size: 1.5rem;
+}
+
+.contact-method .details h3 {
+    color: #ffffff;
+    font-size: 1rem;
+    margin-bottom: 0.3rem;
+}
+
+.contact-method .details a {
+    color: #00ffff;
+    text-decoration: none;
+    font-size: 0.95rem;
+}
+
+.contact-method .details a:hover {
+    color: #ff00ff;
+}
+
+.contact-method .details .status {
+    color: #00ff64;
+    font-size: 0.85rem;
+}
+
+/* Right side - Form */
+.contact-form-wrapper {
+    background: rgba(26, 26, 46, 0.8);
+    padding: 2.5rem;
+    border-radius: 20px;
+    border: 2px solid #00ffff;
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.1);
+}
+
+.contact-form-wrapper h2 {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+    color: #ffffff;
+}
+
+.contact-form-wrapper .form-subtitle {
+    color: #b0b0b0;
+    margin-bottom: 2rem;
+    font-size: 0.95rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    color: #00ffff;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(0, 255, 255, 0.3);
+    border-radius: 10px;
+    color: #ffffff;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #ff00ff;
+    box-shadow: 0 0 15px rgba(255, 0, 255, 0.2);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: #666;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 1.2rem;
+    background: linear-gradient(135deg, #00ffff, #ff00ff);
+    border: none;
+    border-radius: 10px;
+    color: #000;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.submit-btn:hover {
+    transform: scale(1.02);
+    box-shadow: 0 10px 30px rgba(255, 0, 255, 0.4);
+}
+
+/* Flash Messages */
+.flash-message {
+    padding: 1rem 1.5rem;
+    margin-bottom: 1.5rem;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    animation: slideIn 0.3s ease;
+}
+
+.flash-success {
+    background: rgba(0, 255, 100, 0.1);
+    border: 1px solid rgba(0, 255, 100, 0.4);
+    color: #00ff64;
+}
+
+.flash-error {
+    background: rgba(255, 0, 100, 0.1);
+    border: 1px solid rgba(255, 0, 100, 0.4);
+    color: #ff6464;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 2rem;
+    margin-top: 4rem;
+    border-top: 2px solid #00ffff;
+    color: #888;
+    background: rgba(0, 0, 0, 0.7);
+    position: relative;
+    z-index: 1;
+}
