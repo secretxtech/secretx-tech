@@ -1900,6 +1900,78 @@ footer {
    Mobile Responsive Styles
    ========================================== */
 @media (max-width: 768px) {
+    /* Performance optimizations for mobile */
+    * {
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+    }
+
+    /* Disable heavy effects */
+    .grid-overlay,
+    .hex-pattern,
+    .floating-particles,
+    .scanline,
+    .glow-orb,
+    .tech-ring,
+    .ai-corner {
+        display: none !important;
+    }
+
+    /* Disable backdrop blur (very heavy) */
+    .top-nav,
+    .side-menu,
+    .modal-btn-preview,
+    .modal-btn-explore,
+    .modal-close {
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+    }
+
+    /* Simplify card hover - no transform */
+    .card:hover {
+        transform: none;
+        box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+    }
+
+    /* Disable pulse animation */
+    .pulse {
+        animation: none;
+    }
+
+    /* Simplify modal animations */
+    .modal-container {
+        transition: opacity 0.2s ease;
+    }
+
+    .modal-overlay.active .modal-container {
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    .modal-scan-line,
+    .modal-data-stream,
+    .breach-ring,
+    .breach-flash,
+    .screen-breach {
+        display: none !important;
+    }
+
+    /* Simplify modal content animations */
+    .modal-icon,
+    .modal-title,
+    .modal-description,
+    .modal-buttons {
+        transition: none;
+        opacity: 1;
+        transform: none;
+    }
+
+    .modal-overlay.active .modal-icon,
+    .modal-overlay.active .modal-title,
+    .modal-overlay.active .modal-description,
+    .modal-overlay.active .modal-buttons {
+        transition-delay: 0s;
+    }
+
     /* Header & Logo */
     header {
         padding: 3rem 1rem 2rem 1rem;
