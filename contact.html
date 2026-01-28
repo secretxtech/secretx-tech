@@ -5,9 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Get in Touch | SecretX Tech</title>
     <link rel="icon" type="image/svg+xml" href="./static/images/favicon.svg">
-    <link rel="shortcut icon" href="./static/images/favicon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="./static/images/favicon.svg">
     <link rel="stylesheet" href="./static/css/contact.css">
+    <style>
+        /* This makes the Rocket look good when it appears */
+        .success-overlay {
+            text-align: center;
+            padding: 40px 20px;
+            animation: fadeIn 0.5s ease forwards;
+        }
+        .success-icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+            display: block;
+            filter: drop-shadow(0 0 15px rgba(0, 255, 255, 0.5));
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
 </head>
 <body>
     <div class="bg-grid"></div>
@@ -23,7 +39,7 @@
         <div class="contact-wrapper">
             <div class="contact-info">
                 <h1>Get in Touch</h1>
-                <p class="subtitle">Ready to start your next project? Our team is here to help you build something extraordinary. Reach out and let's create the future together.</p>
+                <p class="subtitle">Ready to start your next project? Our team is here to help you build something extraordinary.</p>
 
                 <div class="contact-method">
                     <div class="icon">📧</div>
@@ -43,59 +59,70 @@
             </div>
 
             <div class="contact-form-wrapper">
-                <h2>Send us a Message</h2>
-                <p class="form-subtitle">Fill out the form below and we'll get back to you soon.</p>
+                <div id="formContainer">
+                    <h2>Send us a Message</h2>
+                    <p class="form-subtitle">Fill out the form below and we'll get back to you soon.</p>
 
-                <form action="https://script.google.com/macros/s/AKfycbwT_uj22YTT3lkEzGM5gPxy7KF2oQRahSnXM_CIRr0QlisajMN45Vakswrv1rb394vLMg/exec" method="POST">
-                    
-                    <input type="text" name="_honey" style="display:none">
-
-                    <div class="form-group">
-                        <label for="fullname">Full Name</label>
-                        <input type="text" id="fullname" name="fullname" placeholder="John Doe" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="email">Email Address</label>
-                        <input type="email" id="email" name="email" placeholder="john@example.com" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="company">Company</label>
-                        <input type="text" id="company" name="company" placeholder="Your Company Name">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="project">Tell us about your project</label>
-                        <textarea id="project" name="project" placeholder="Describe your project, goals, and how we can help..." required></textarea>
-                    </div>
-
-                    <button type="submit" class="submit-btn">Send Message</button>
-                </form>
+                    <form id="contactForm" action="https://script.google.com/macros/s/AKfycbwT_uj22YTT3lkEzGM5gPxy7KF2oQRahSnXM_CIRr0QlisajMN45Vakswrv1rb394vLMg/exec" method="POST">
+                        <input type="text" name="_honey" style="display:none">
+                        <div class="form-group">
+                            <label for="fullname">Full Name</label>
+                            <input type="text" id="fullname" name="fullname" placeholder="John Doe" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" placeholder="john@example.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="company">Company</label>
+                            <input type="text" id="company" name="company" placeholder="Your Company Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="project">Tell us about your project</label>
+                            <textarea id="project" name="project" placeholder="Describe your project..." required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Send Message</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
 
-    <footer>
-        <p>&copy; 2026 SecretX Tech | Build Different.</p>
-    </footer>
-
     <script>
-        // This handles showing the "Success" message if Google redirects back to this page
-        if (window.location.search.includes('success=true')) {
-            const wrapper = document.querySelector('.contact-form-wrapper');
-            const successDiv = document.createElement('div');
-            // Adding styles inline for the success message
-            successDiv.style.background = 'rgba(0, 255, 255, 0.1)';
-            successDiv.style.border = '1px solid #00ffff';
-            successDiv.style.color = '#fff';
-            successDiv.style.padding = '15px';
-            successDiv.style.marginBottom = '20px';
-            successDiv.style.borderRadius = '8px';
-            successDiv.style.textAlign = 'center';
-            successDiv.textContent = 'Message sent successfully! We\'ll get back to you soon.';
-            wrapper.insertBefore(successDiv, wrapper.querySelector('form'));
-        }
+        const contactForm = document.getElementById('contactForm');
+        const formContainer = document.getElementById('formContainer');
+        const submitBtn = document.querySelector('.submit-btn');
+
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault(); // STOPS the refresh so the rocket can show!
+
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
+
+            const formData = new FormData(contactForm);
+
+            fetch(contactForm.action, {
+                method: 'POST',
+                body: formData,
+                mode: 'no-cors' 
+            })
+            .then(() => {
+                // Hides the form and SHOWS THE ROCKET 🚀
+                formContainer.innerHTML = `
+                    <div class="success-overlay">
+                        <div class="success-icon">🚀</div>
+                        <h2 style="color: #fff; margin-bottom: 10px;">Message Received!</h2>
+                        <p style="color: #b0b0b0;">Your project details have been sent.</p>
+                        <button onclick="window.location.reload()" class="submit-btn" style="margin-top: 30px; width: auto; padding: 12px 40px; display: inline-block;">Send Another</button>
+                    </div>
+                `;
+            })
+            .catch(error => {
+                alert('Error sending message. Please try again.');
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Send Message';
+            });
+        });
     </script>
 </body>
 </html>
