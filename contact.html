@@ -8,6 +8,26 @@
     <link rel="shortcut icon" href="./static/images/favicon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="./static/images/favicon.svg">
     <link rel="stylesheet" href="./static/css/contact.css">
+    <style>
+        /* Success Animation Styles */
+        .success-overlay {
+            text-align: center;
+            padding: 40px 20px;
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        .success-icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+            display: block;
+            filter: drop-shadow(0 0 15px rgba(0, 255, 255, 0.5));
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
 </head>
 <body>
     <div class="bg-grid"></div>
@@ -21,7 +41,6 @@
 
     <div class="container">
         <div class="contact-wrapper">
-            <!-- Left side - Info -->
             <div class="contact-info">
                 <h1>Get in Touch</h1>
                 <p class="subtitle">Ready to start your next project? Our team is here to help you build something extraordinary. Reach out and let's create the future together.</p>
@@ -43,16 +62,11 @@
                 </div>
             </div>
 
-            <!-- Right side - Form -->
             <div class="contact-form-wrapper">
                 <h2>Send us a Message</h2>
                 <p class="form-subtitle">Fill out the form below and we'll get back to you soon.</p>
 
-                <form action="https://script.google.com/macros/s/AKfycbwT_uj22YTT3lkEzGM5gPxy7KF2oQRahSnXM_CIRr0QlisajMN45Vakswrv1rb394vLMg/exec" method="POST">
-                    <!-- FormSubmit config -->
-                    <input type="hidden" name="_subject" value="New Contact from SecretX Tech Website">
-                    <input type="hidden" name="_captcha" value="false">
-                    <input type="hidden" name="_next" value="https://secretxtech.vercel.app/contact.html?success=true">
+                <form id="contactForm" action="https://script.google.com/macros/s/AKfycbwT_uj22YTT3lkEzGM5gPxy7KF2oQRahSnXM_CIRr0QlisajMN45Vakswrv1rb394vLMg/exec" method="POST">
                     <input type="text" name="_honey" style="display:none">
 
                     <div class="form-group">
@@ -86,14 +100,48 @@
     </footer>
 
     <script>
-        // Show success message if redirected back after form submit
-        if (window.location.search.includes('success=true')) {
-            const wrapper = document.querySelector('.contact-form-wrapper');
-            const successDiv = document.createElement('div');
-            successDiv.className = 'flash-message flash-success';
-            successDiv.textContent = 'Message sent successfully! We\'ll get back to you soon.';
-            wrapper.insertBefore(successDiv, wrapper.querySelector('form'));
-        }
+        const contactForm = document.getElementById('contactForm');
+        const formWrapper = document.querySelector('.contact-form-wrapper');
+        const submitBtn = document.querySelector('.submit-btn');
+
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // 1. Visual Feedback
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
+            submitBtn.style.opacity = '0.7';
+            submitBtn.style.cursor = 'not-allowed';
+
+            // 2. Data Prep
+            const formData = new FormData(contactForm);
+
+            // 3. The background request
+            fetch(contactForm.action, {
+                method: 'POST',
+                body: formData,
+                mode: 'no-cors' 
+            })
+            .then(() => {
+                // 4. Success State (The "Logo" screen)
+                formWrapper.innerHTML = `
+                    <div class="success-overlay">
+                        <div class="success-icon">🚀</div>
+                        <h2 style="color: #fff; margin-bottom: 10px;">Message Received!</h2>
+                        <p style="color: #b0b0b0;">Your project details have been sent to our team.</p>
+                        <p style="color: #b0b0b0; margin-top: 5px;">We'll reach out to you shortly.</p>
+                        <button onclick="window.location.reload()" class="submit-btn" style="margin-top: 30px; width: auto; padding: 12px 40px; display: inline-block;">Send Another</button>
+                    </div>
+                `;
+            })
+            .catch(error => {
+                console.error('Error!', error.message);
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Send Message';
+                submitBtn.style.opacity = '1';
+                alert('Oops! Something went wrong. Please check your connection and try again.');
+            });
+        });
     </script>
 </body>
 </html>
