@@ -9,20 +9,17 @@
     <link rel="apple-touch-icon" href="./static/images/favicon.svg">
     <link rel="stylesheet" href="./static/css/contact.css">
     <style>
-        /* Success Animation Styles */
         .success-overlay {
             text-align: center;
             padding: 40px 20px;
             animation: fadeIn 0.5s ease forwards;
         }
-
         .success-icon {
             font-size: 60px;
             margin-bottom: 20px;
             display: block;
             filter: drop-shadow(0 0 15px rgba(0, 255, 255, 0.5));
         }
-
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
@@ -43,21 +40,12 @@
         <div class="contact-wrapper">
             <div class="contact-info">
                 <h1>Get in Touch</h1>
-                <p class="subtitle">Ready to start your next project? Our team is here to help you build something extraordinary. Reach out and let's create the future together.</p>
-
+                <p class="subtitle">Ready to start your next project? Our team is here to help you build something extraordinary.</p>
                 <div class="contact-method">
                     <div class="icon">📧</div>
                     <div class="details">
                         <h3>Email Support</h3>
                         <a href="mailto:contact@secretx-tech.com">contact@secretx-tech.com</a>
-                    </div>
-                </div>
-
-                <div class="contact-method">
-                    <div class="icon">⏱️</div>
-                    <div class="details">
-                        <h3>Response Time</h3>
-                        <span style="color: #b0b0b0;">We'll reply soon</span>
                     </div>
                 </div>
             </div>
@@ -66,7 +54,7 @@
                 <h2>Send us a Message</h2>
                 <p class="form-subtitle">Fill out the form below and we'll get back to you soon.</p>
 
-                <form id="contactForm" action="<form id="contactForm" action="https://script.google.com/macros/s/AKfycbwT_uj22YTT3lkEzGM5gPxy7KF2oQRah-4vLMg/exec" method="POST">
+                <form id="contactForm" action="https://script.google.com/macros/s/AKfycbwT_uj22YTT3lkEzGM5gPxy7KF2oQRah-4vLMg/exec" method="POST">
                     <input type="text" name="_honey" style="display:none">
 
                     <div class="form-group">
@@ -86,7 +74,7 @@
 
                     <div class="form-group">
                         <label for="project">Tell us about your project</label>
-                        <textarea id="project" name="project" placeholder="Describe your project, goals, and how we can help..." required></textarea>
+                        <textarea id="project" name="project" placeholder="Describe your project..." required></textarea>
                     </div>
 
                     <button type="submit" class="submit-btn">Send Message</button>
@@ -107,29 +95,23 @@
         contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
 
-            // 1. Visual Feedback
             submitBtn.disabled = true;
             submitBtn.textContent = 'Sending...';
             submitBtn.style.opacity = '0.7';
-            submitBtn.style.cursor = 'not-allowed';
 
-            // 2. Data Prep
             const formData = new FormData(contactForm);
 
-            // 3. The background request
             fetch(contactForm.action, {
                 method: 'POST',
                 body: formData,
                 mode: 'no-cors' 
             })
             .then(() => {
-                // 4. Success State (The "Logo" screen)
                 formWrapper.innerHTML = `
                     <div class="success-overlay">
-                        <div class="success-icon">✅</div>
+                        <div class="success-icon">🚀</div>
                         <h2 style="color: #fff; margin-bottom: 10px;">Message Received!</h2>
-                        <p style="color: #b0b0b0;">Your project details have been sent to our team.</p>
-                        <p style="color: #b0b0b0; margin-top: 5px;">We'll reach out to you shortly.</p>
+                        <p style="color: #b0b0b0;">We'll reach out to you shortly.</p>
                         <button onclick="window.location.reload()" class="submit-btn" style="margin-top: 30px; width: auto; padding: 12px 40px; display: inline-block;">Send Another</button>
                     </div>
                 `;
@@ -138,8 +120,7 @@
                 console.error('Error!', error.message);
                 submitBtn.disabled = false;
                 submitBtn.textContent = 'Send Message';
-                submitBtn.style.opacity = '1';
-                alert('Oops! Something went wrong. Please check your connection and try again.');
+                alert('Oops! Something went wrong.');
             });
         });
     </script>
