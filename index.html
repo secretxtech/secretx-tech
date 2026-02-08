@@ -153,39 +153,66 @@
     </div>
 
     <style>
-        .footer-row {
+        .footer-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 1.5rem;
+            position: relative;
+        }
+        .footer-centre {
+            text-align: center;
+        }
+        .footer-centre p {
+            margin: 0;
+        }
+        .footer-links {
             display: flex;
             justify-content: center;
-            align-items: center;
-            padding: 0 1.5rem;
             gap: 1.5rem;
+            margin-top: 0.4rem;
+            font-size: 0.85rem;
         }
         .footer-socials {
             display: flex;
             align-items: center;
             gap: 1.2rem;
             font-size: 1.9rem;
-        }
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            margin-top: 0.8rem;
-            font-size: 0.85rem;
+            position: absolute;
+            right: 1.5rem;
         }
         @media (max-width: 768px) {
-            .footer-row {
+            .footer-content {
                 flex-direction: column;
                 gap: 0.8rem;
+                position: static;
             }
             .footer-socials {
+                position: static;
+                justify-content: center;
                 font-size: 1.6rem;
+                order: 3;
+            }
+            .footer-centre {
+                order: 1;
+            }
+            .footer-links {
+                order: 2;
             }
         }
     </style>
     <footer>
-        <div class="footer-row">
-            <p style="margin: 0; text-align: center;">&copy; 2026 SecretX Tech | Build Different.</p>
+        <div class="footer-content">
+            <div class="footer-centre">
+                <p>&copy; 2026 SecretX Tech | Build Different.</p>
+                <div class="footer-links">
+                    <!-- Replace # with your Privacy Policy page URL e.g. ./privacy.html -->
+                    <a href="#" style="color: #b0b0b0; text-decoration: none; transition: color 0.3s;">Privacy Policy</a>
+                    <span style="color: #555;">|</span>
+                    <!-- Replace # with your Terms of Use page URL e.g. ./terms.html -->
+                    <a href="#" style="color: #b0b0b0; text-decoration: none; transition: color 0.3s;">Terms of Use</a>
+                </div>
+            </div>
             <div class="footer-socials">
                 <a href="https://www.linkedin.com/company/secretx-tech" target="_blank" style="color: #5B9BD5; transition: opacity 0.3s;" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
                 <a href="https://www.youtube.com/@SecretXTech" target="_blank" style="color: #FF4444; transition: opacity 0.3s;" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
@@ -193,13 +220,6 @@
                 <!-- Replace # with your WhatsApp link e.g. https://wa.me/yourphonenumber -->
                 <a href="#" target="_blank" style="color: #5BF870; transition: opacity 0.3s;" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
             </div>
-        </div>
-        <div class="footer-links">
-            <!-- Replace # with your Privacy Policy page URL e.g. ./privacy.html -->
-            <a href="#" style="color: #b0b0b0; text-decoration: none; transition: color 0.3s;">Privacy Policy</a>
-            <span style="color: #555;">|</span>
-            <!-- Replace # with your Terms of Use page URL e.g. ./terms.html -->
-            <a href="#" style="color: #b0b0b0; text-decoration: none; transition: color 0.3s;">Terms of Use</a>
         </div>
     </footer>
 
