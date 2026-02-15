@@ -103,6 +103,12 @@
         <div class="grid" id="services">
             <div class="card" data-video="https://youtu.be/gkI9zUfixck" data-status="">
                 <div class="card-status-overlay"></div>
+                <div class="click-me-hint" id="clickMeHint">
+                    <div class="hint-x">
+                        <span class="hint-slash-line"></span>
+                    </div>
+                    <span class="hint-text">Click</span>
+                </div>
                 <div class="card-icon">🎨🚀</div>
                 <h2>3D DESIGN </h2>
                 <p>Experience design beyond imagination. Our design solutions solve complex problems in milliseconds
@@ -137,10 +143,9 @@
 
             <div class="card" data-video="YOUR_GOOGLE_DRIVE_VIDEO_ID_5" data-status="coming-soon">
                 <div class="card-status-overlay"></div>
-                <div class="card-icon">🤖🦾🔧⚙️</div>
-                <h2>Robotics</h2>
-                <p>Building intelligent machines that interact with the physical world. From automation systems to
-                    custom robotic solutions, we engineer the future of mechanical innovation.</p>
+                <div class="card-icon">🎓📚💡🚀</div>
+                <h2>SECRET<span class="academy-x">X</span> ACADEMY</h2>
+                <p>Learn from real industry experience — for FREE. Our hands-on teaching brings you the skills and knowledge straight from the field, so you can build with confidence and grow without limits.</p>
             </div>
         </div>
 
@@ -153,6 +158,109 @@
     </div>
 
     <style>
+        .click-me-hint {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            width: 55px;
+            height: 60px;
+            pointer-events: none;
+            z-index: 10;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        .click-me-hint.hidden {
+            opacity: 0;
+            transform: scale(0.3);
+            pointer-events: none;
+        }
+        /* X shape - same samurai sword style as logo but blue & transparent */
+        .hint-x {
+            position: relative;
+            width: 100%;
+            height: 42px;
+            animation: hintXBlink 5s ease-in-out infinite;
+            filter: drop-shadow(0 0 8px rgba(255, 0, 50, 0.5));
+        }
+        .hint-x::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 50px;
+            height: 8px;
+            background: linear-gradient(90deg, rgba(255, 0, 50, 0.5) 0%, rgba(255, 0, 50, 0.5) 85%, transparent 100%);
+            transform: translate(-50%, -50%) rotate(55deg);
+            border-radius: 3px 3px 3px 1px;
+            clip-path: polygon(0 0, 100% 20%, 100% 80%, 0 100%);
+        }
+        .hint-x::after {
+            content: '';
+            position: absolute;
+            top: 35%;
+            left: 47%;
+            width: 45px;
+            height: 7px;
+            background: linear-gradient(90deg, transparent 0%, rgba(255, 0, 50, 0.5) 15%, rgba(255, 0, 50, 0.5) 100%);
+            transform: translate(-50%, -50%) rotate(-50deg);
+            border-radius: 1px 3px 3px 3px;
+            clip-path: polygon(0 20%, 100% 0, 100% 100%, 0 80%);
+        }
+        .hint-slash-line {
+            display: block;
+            position: absolute;
+            top: 50%;
+            left: -15px;
+            width: 80px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), rgba(255, 0, 50, 0.6), rgba(255, 255, 255, 0.5), transparent);
+            transform: rotate(-20deg);
+            animation: hintSlashLine 8s ease-in-out infinite;
+            opacity: 0;
+        }
+        .hint-text {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.55rem;
+            font-weight: 700;
+            color: rgba(255, 0, 51, 0.8);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 6px rgba(255, 0, 51, 0.5);
+            animation: hintTextBlink 1.2s ease-in-out infinite;
+            white-space: nowrap;
+        }
+        @keyframes hintXBlink {
+            0%, 50% {
+                filter: drop-shadow(0 0 10px rgba(255, 0, 50, 0.6)) drop-shadow(0 0 20px rgba(255, 0, 50, 0.3));
+                opacity: 1;
+            }
+            70%, 85% {
+                filter: drop-shadow(0 0 4px rgba(255, 0, 50, 0.3));
+                opacity: 0.4;
+            }
+            100% {
+                filter: drop-shadow(0 0 10px rgba(255, 0, 50, 0.6)) drop-shadow(0 0 20px rgba(255, 0, 50, 0.3));
+                opacity: 1;
+            }
+        }
+        @keyframes hintSlashLine {
+            0% { opacity: 0; transform: rotate(-20deg) translateX(-15px); }
+            40% { opacity: 0.5; }
+            60% { opacity: 0.5; }
+            100% { opacity: 0; transform: rotate(-20deg) translateX(15px); }
+        }
+        @keyframes hintTextBlink {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 0.2; }
+        }
+        .academy-x {
+            color: #ff0033;
+            display: inline-block;
+            animation: xBlink 5s ease-in-out infinite;
+            filter: drop-shadow(0 0 12px rgba(255, 0, 50, 0.6));
+        }
         .footer-content {
             display: flex;
             align-items: center;
@@ -217,7 +325,8 @@
                 <a href="https://www.linkedin.com/company/secretx-tech" target="_blank" style="color: #5B9BD5; transition: opacity 0.3s;" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
                 <a href="https://www.youtube.com/@SecretXTech" target="_blank" style="color: #FF4444; transition: opacity 0.3s;" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
                 <a href="https://www.tiktok.com/@secretxtech" target="_blank" style="color: #ffffff; transition: opacity 0.3s;" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
-                <a href="https://wa.me/message/EE6ZWTR5HXYKA1" target="_blank" style="color: #5BF870; transition: opacity 0.3s;" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+                <!-- Replace # with your WhatsApp link e.g. https://wa.me/yourphonenumber -->
+                <a href="#" target="_blank" style="color: #5BF870; transition: opacity 0.3s;" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
             </div>
         </div>
     </footer>
@@ -262,6 +371,16 @@
         </div>
     </div>
 
+    <script>
+        document.querySelectorAll('.card').forEach(function(card) {
+            card.addEventListener('click', function() {
+                var hint = document.getElementById('clickMeHint');
+                if (hint) {
+                    hint.classList.add('hidden');
+                }
+            });
+        });
+    </script>
     <script src="./static/js/main.js"></script>
 </body>
 
